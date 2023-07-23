@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { auth } from '$lib/firebase';
-	import { user } from '$lib/firebase';
+	import { auth, user } from '$lib/firebase';
 	import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 	async function signInWithGoogle() {
