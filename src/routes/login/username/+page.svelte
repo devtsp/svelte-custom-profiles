@@ -1,6 +1,6 @@
 <script lang="ts">
 	import AuthCheck from '$lib/components/AuthCheck.svelte';
-	import { db, user } from '$lib/firebase';
+	import { db, user, userData } from '$lib/firebase';
 	import { doc, getDoc, writeBatch } from 'firebase/firestore';
 
 	let username = '';
@@ -60,32 +60,43 @@
 </script>
 
 <AuthCheck>
-	<form on:submit|preventDefault={confirmUsername} class="w-full">
-		<input
-			type="text"
-			placeholder="Username"
-			bind:value={username}
-			on:input={checkAvailability}
-			class="input input-sm w-full"
-			class:input-error={!isValid && isTouched}
-			class:input-warning={isTaken}
-		/>
-
-		{#if !isValid && isTouched}
-			<p class="text-error text-sm mt-5">
-				Must be 3-16 characters long, alphanumeric only
-			</p>
-		{/if}
-
-		{#if loading}
-			<p class="text-warning text-sm mt-5">Checking availability...</p>
-		{/if}
-
-		{#if !loading && isValid && isAvailable}
-			<p class="text-4xl mt-5">@{username}</p>
-			<button class="btn btn-outline btn-accent btn-sm mt-5 w-full"
-				>Confirm username</button
+	{#if $userData?.username}
+		<p>
+			Your username is:<br />
+			<span class="text-2xl font-bold text-blue-500">@{$userData.username}</span
 			>
-		{/if}
-	</form>
+		</p>
+		<p>(Username cannot be changed)</p>
+		<a href="/login/photo" class="link-accent underline">Upload Profile Image</a
+		>
+	{:else}
+		<form on:submit|preventDefault={confirmUsername} class="w-full">
+			<input
+				type="text"
+				placeholder="Username"
+				bind:value={username}
+				on:input={checkAvailability}
+				class="input input-sm w-full"
+				class:input-error={!isValid && isTouched}
+				class:input-warning={isTaken}
+			/>
+
+			{#if !isValid && isTouched}
+				<p class="text-error text-sm mt-5">
+					Must be 3-16 characters long, alphanumeric only
+				</p>
+			{/if}
+
+			{#if loading}
+				<p class="text-warning text-sm mt-5">Checking availability...</p>
+			{/if}
+
+			{#if !loading && isValid && isAvailable}
+				<p class="text-4xl mt-5">@{username}</p>
+				<button class="btn btn-outline btn-accent btn-sm mt-5 w-full"
+					>Confirm username</button
+				>
+			{/if}
+		</form>
+	{/if}
 </AuthCheck>
