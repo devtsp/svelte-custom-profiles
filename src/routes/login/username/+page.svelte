@@ -61,12 +61,12 @@
 
 <AuthCheck>
 	{#if $userData?.username}
-		<p>
-			Your username is:<br />
-			<span class="text-2xl font-bold text-blue-500">@{$userData.username}</span
+		<p class="text-xl">
+			Your username is <br />
+			<span class="text-4xl font-bold text-blue-500">@{$userData.username}</span
 			>
 		</p>
-		<p>(Username cannot be changed)</p>
+		<p class="my-4">(Username cannot be changed)</p>
 		<a href="/login/photo" class="link-accent underline">Upload Profile Image</a
 		>
 	{:else}
