@@ -28,7 +28,8 @@
 	<form>
 		<div>
 			<img
-				src={previewURL ?? $userData?.photoURL ?? '/user.jpg'}
+				data-src={previewURL ?? $userData?.photoURL ?? '/user.jpg'}
+				src={previewURL ?? $userData?.photoURL}
 				alt="user"
 				width="100%"
 			/>
