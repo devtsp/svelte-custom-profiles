@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import AnimatedRoute from '../../lib/components/AnimatedRoute.svelte';
-	import AuthCheck from '../../lib/components/AuthCheck.svelte';
+	import AnimatedRoute from '$lib/components/AnimatedRoute.svelte';
+	import AuthCheck from '$lib/components/AuthCheck.svelte';
 </script>
 
 <nav class="flex justify-center my-6">
@@ -25,11 +25,9 @@
 </nav>
 
 <AnimatedRoute>
-	<main class="card w-4/6 bg-neutral text-neutral-content mx-auto">
+	<main class="card w-4/6 bg-neutral text-neutral-content mx-auto max-w-sm">
 		<div class="card-body items-center text-center">
 			<slot />
 		</div>
 	</main>
 </AnimatedRoute>
-
-<AuthCheck>Some auth-only content</AuthCheck>

@@ -9,16 +9,20 @@
 	}
 </script>
 
-<h2>Login</h2>
-
 {#if $user}
-	<h2 class="card-title">Welcome, {$user.displayName}</h2>
-	<p class="text-center text-success">You are logged in</p>
-	<button class="btn btn-sm btn-warning" on:click={() => signOut(auth)}
-		>Sign out</button
+	<h2 class="">
+		<span>Welcome, </span> <br />
+		<span class="text-2xl font-bold">
+			{$user.displayName}
+		</span>
+	</h2>
+	<p class="text-center text-success mt-3">You are logged in</p>
+	<button
+		class="btn btn-sm btn-outline btn-error mt-5"
+		on:click={() => signOut(auth)}>Sign out</button
 	>
 {:else}
-	<button class="btn btn-primary" on:click={signInWithGoogle}
+	<button class="btn btn-sm btn-outline btn-primary" on:click={signInWithGoogle}
 		>Sign in with Google</button
 	>
 {/if}
