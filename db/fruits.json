@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Morango"
+    },
+    {
+        "name": "Banana",
+        "price": 15.65
+    },
+    {
+        "name": "Manzana",
+        "price": 0
+    },
+    {
+        "name": "Mandarina",
+        "price": 0
+    },
+    {
+        "name": "Palta",
+        "price": 450
+    },
+    {
+        "name": "Frutilla",
+        "price": 700
+    }
+]
