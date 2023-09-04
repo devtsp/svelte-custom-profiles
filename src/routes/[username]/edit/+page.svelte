@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_PAGE } from '$env/static/public';
 	import { page } from '$app/stores';
 	import UserLink from '$lib/components/UserLink.svelte';
 	import SortableList from '$lib/components/SortableList.svelte';
@@ -37,7 +38,6 @@
 	$: urlIsValid = $formData.url.match(/^(ftp|http|https):\/\/[^ "]+$/);
 	$: titleIsValid = $formData.title.length < 20 && $formData.title.length > 0;
 	$: formIsValid = urlIsValid && titleIsValid;
-	$: formToJson = JSON.stringify($formData, null, 2);
 
 	async function addLink(e: SubmitEvent) {
 		const userRef = doc(db, 'users', $user!.uid);
@@ -70,9 +70,17 @@
 
 <main class="max-w-xl mx-auto">
 	{#if $userData?.username == $page.params.username}
-		<h1 class="mx-2 text-2xl font-bold mt-8 mb-4 text-center">
+		<h1 class="mx-2 text-[28px] font-bold mt-8 mb-4 text-center">
 			Edit your Profile
 		</h1>
+
+		<p class="mb-[50px] text-2xl">
+			Profile link: <a
+				href={`${PUBLIC_PAGE}/${$userData.username}`}
+				class="link link-hover text-sky-500"
+				>{PUBLIC_PAGE}/{$userData.username}</a
+			>
+		</p>
 
 		<SortableList list={$userData?.links} on:sort={sortList} let:item let:index>
 			<div class="group relative">

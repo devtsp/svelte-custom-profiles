@@ -23,10 +23,9 @@
 	/>
 
 	<p class="text-xl my-8">{data.bio ?? 'no bio yet...'}</p>
-	<ul class="list-none">
-		Hello
+	<ul class="list-none flex flex-col gap-[8px]">
 		{#each data.links as item}
-			<li>
+			<li class="">
 				<UserLink {...item} />
 			</li>
 		{/each}
