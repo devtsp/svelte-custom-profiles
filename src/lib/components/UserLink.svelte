@@ -1,5 +1,5 @@
 <script>
-	export let icon = 'default';
+	export let icon = 'Default';
 	export let url = 'foo';
 	export let title = 'some cool title';
 </script>
