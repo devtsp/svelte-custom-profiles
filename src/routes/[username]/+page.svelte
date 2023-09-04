@@ -1,4 +1,5 @@
 <script lang="ts">
+	import UserLink from '$lib/components/UserLink.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -25,7 +26,9 @@
 	<ul class="list-none">
 		Hello
 		{#each data.links as item}
-			<!-- {@debug item} -->
+			<li>
+				<UserLink {...item} />
+			</li>
 		{/each}
 	</ul>
 </main>

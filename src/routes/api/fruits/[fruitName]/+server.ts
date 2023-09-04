@@ -1,6 +1,6 @@
 import type { RequestHandler } from '../../$types';
 
-import fruits from 'src/services/Fruits.service';
+import fruits from 'src/lib/services/Fruits.service';
 
 export const GET: RequestHandler = async ({ params }) => {
 	let response = 'Unexpected Error';
