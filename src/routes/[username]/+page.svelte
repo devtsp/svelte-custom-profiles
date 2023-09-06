@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { user } from '$lib/firebase';
+	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
 
 	import UserLink from '$lib/components/UserLink.svelte';
@@ -12,10 +13,13 @@
 	<meta name="description" content={data.bio} />
 </svelte:head>
 
-<main class="prose text-center mx-auto mt-8">
-	<h1 class="text-3xl text-lime-600 my-4">
-		@{data.username}
-	</h1>
+<main class="prose text-center mx-auto mt-2 w-[500px]">
+	{#if data.uid === $user?.uid}
+		<button
+			class="btn btn-sm btn-neutral my-3 rounded w-40"
+			on:click={() => goto(`/${data.username}/edit`)}>(edit profile)</button
+		>
+	{/if}
 
 	<img
 		src={data.photoURL ?? '/user.png'}
@@ -23,12 +27,14 @@
 		width="256"
 		class="mx-auto"
 	/>
-
-	<p class="text-xl my-8">{data.bio ?? 'no bio yet...'}</p>
-	<ul class="list-none flex flex-col gap-[8px]">
-		{#each data.links as item}
-			<li class="">
-				<UserLink {...item} />
+	<h1 class="text-4xl text-lime-600 mt-4">
+		@{data.username}
+	</h1>
+	<p class="text-xl my-2">{data.bio ?? 'no bio yet...'}</p>
+	<ul class="list-none flex flex-col gap-[8px] mt-8">
+		{#each data.links as { icon, url, title }}
+			<li>
+				<UserLink {...{ icon, url, title }} />
 			</li>
 		{/each}
 	</ul>

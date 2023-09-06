@@ -5,6 +5,8 @@
 	async function signInWithGoogle() {
 		const provider = new GoogleAuthProvider();
 		const credential = await signInWithPopup(auth, provider);
+
+		// Server side cookie auth
 		const idToken = await credential.user.getIdToken();
 		const res = await fetch('/api/signin', {
 			method: 'POST',

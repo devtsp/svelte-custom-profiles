@@ -1,5 +1,13 @@
 import { error } from '@sveltejs/kit';
-import { collection, getDocs, limit, query, where } from 'firebase/firestore';
+import {
+	collection,
+	getDocs,
+	limit,
+	query,
+	where,
+	doc,
+	getDoc,
+} from 'firebase/firestore';
 import type { PageLoad } from './$types';
 
 import { db } from '$lib/firebase';
@@ -24,10 +32,14 @@ export const load = (async ({ params }) => {
 		throw error(403, `The profile of @${data.username} is not public.`);
 	}
 
+	const usernameResult = await getDoc(doc(db, 'usernames', params.username));
+	const { uid } = usernameResult.data() as { uid: string };
+
 	return {
 		username: data.username,
 		photoURL: data.photoURL,
 		bio: data.bio,
 		links: data.links ?? [],
+		uid,
 	};
 }) satisfies PageLoad;

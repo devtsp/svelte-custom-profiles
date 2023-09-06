@@ -6,13 +6,13 @@
 	export let data: PageData;
 </script>
 
-<main class="mx-auto my-4">
+<main class="mx-auto my-4 w-[500px]">
 	<p class="text-error">{$page.form?.problem ?? ''}</p>
 
-	<form method="POST" use:enhance class="w-[700px]">
+	<form method="POST" use:enhance class="w-full">
 		<div class="form-control">
-			<label for="bio" class="label">
-				<span class="label-text">Your bio</span>
+			<label for="bio" class="label justify-center">
+				<span class="label-text text-lg text-center">Your bio</span>
 			</label>
 			<textarea
 				name="bio"
@@ -20,7 +20,7 @@
 				value={data.bio}
 			/>
 		</div>
-		<button class="btn btn-sm btn-primary mt-3 ml-auto block">Update Bio</button
+		<button class="btn btn-sm btn-primary mt-3 mx-auto block">Update Bio</button
 		>
 	</form>
 </main>

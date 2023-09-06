@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PUBLIC_PAGE } from '$env/static/public';
 	import { page } from '$app/stores';
 	import UserLink from '$lib/components/UserLink.svelte';
 	import SortableList from '$lib/components/SortableList.svelte';
@@ -12,6 +11,7 @@
 		updateDoc,
 	} from 'firebase/firestore';
 	import { writable } from 'svelte/store';
+	import { PUBLIC_PAGE } from '$env/static/public';
 
 	function sortList(e: CustomEvent) {
 		const newList = e.detail;
@@ -66,13 +66,11 @@
 	{#if $userData?.username == $page.params.username}
 		<h1 class="text-xl font-bold my-2 text-center">Edit your Profile</h1>
 
-		<p class="mb-2 text-xl text-center">
-			Profile link: <a
-				href={`${PUBLIC_PAGE}/${$userData.username}`}
-				class="link link-hover text-sky-500"
-				>{PUBLIC_PAGE}/{$userData.username}</a
-			>
-		</p>
+		<a
+			class="link link-hover text-secondary block text-lg text-center"
+			href={`${PUBLIC_PAGE}/${$userData.username}/bio`}
+			>Edit Bio 🖊
+		</a>
 
 		<h2 class="text-center text-lg mb-1 mt-3">Add a new link:</h2>
 		<form
@@ -130,7 +128,7 @@
 		</form>
 
 		<h2 class="text-center text-lg mb-1 mt-3">
-			Modify Links order (drag-and-drop):
+			Modify links order (drag-and-drop):
 		</h2>
 
 		<SortableList list={$userData?.links} on:sort={sortList} let:item let:index>
