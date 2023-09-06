@@ -26,9 +26,9 @@
 
 	// store defaults
 	const formDefaults = {
-		icon: 'custom',
+		icon: 'Custom',
 		title: '',
-		url: 'https://',
+		url: '',
 	};
 
 	// form store
@@ -52,7 +52,6 @@
 			title: '',
 			url: '',
 		});
-		showForm = false;
 	}
 
 	async function deleteLink(item: any) {
@@ -61,20 +60,13 @@
 			links: arrayRemove(item),
 		});
 	}
-
-	function cancelLink() {
-		formData.set(formDefaults);
-		showForm = false;
-	}
 </script>
 
-<main class="max-w-xl mx-auto">
+<main class="max-w-xl mx-auto my-2">
 	{#if $userData?.username == $page.params.username}
-		<h1 class="mx-2 text-[28px] font-bold mt-8 mb-4 text-center">
-			Edit your Profile
-		</h1>
+		<h1 class="text-xl font-bold my-2 text-center">Edit your Profile</h1>
 
-		<p class="mb-[50px] text-2xl">
+		<p class="mb-2 text-xl text-center">
 			Profile link: <a
 				href={`${PUBLIC_PAGE}/${$userData.username}`}
 				class="link link-hover text-sky-500"
@@ -82,26 +74,16 @@
 			>
 		</p>
 
-		<SortableList list={$userData?.links} on:sort={sortList} let:item let:index>
-			<div class="group relative">
-				<UserLink {...item} />
-				<button
-					on:click={() => deleteLink(item)}
-					class="btn btn-xs btn-error invisible group-hover:visible transition-all absolute -right-6 bottom-10"
-					>Delete</button
-				>
-			</div>
-		</SortableList>
-
-		{#if showForm}
-			<form
-				on:submit|preventDefault={addLink}
-				class="bg-base-200 p-6 w-full mx-auto rounded-xl"
-			>
+		<h2 class="text-center text-lg mb-1 mt-3">Add a new link:</h2>
+		<form
+			on:submit|preventDefault={addLink}
+			class="bg-base-200 p-3 w-full mx-auto rounded-xl"
+		>
+			<div class="flex flex-col gap-3">
 				<!-- icon for the link -->
 				<select
 					name="icon"
-					class="select select-sm"
+					class="select select-sm rounded"
 					bind:value={$formData.icon}
 				>
 					{#each icons as icon}
@@ -114,7 +96,7 @@
 					name="title"
 					type="text"
 					placeholder="Title"
-					class="input input-sm"
+					class="input input-sm rounded"
 					bind:value={$formData.title}
 				/>
 
@@ -123,40 +105,43 @@
 					name="url"
 					type="text"
 					placeholder="URL"
-					class="input input-sm"
+					class="input input-sm rounded"
 					bind:value={$formData.url}
 				/>
+			</div>
 
-				<!-- form errors -->
-				<div class="my-4">
-					{#if !titleIsValid}
-						<p class="text-error text-xs">Must have valid title</p>
-					{/if}
-					{#if !urlIsValid}
-						<p class="text-error text-xs">Must have a valid URL</p>
-					{/if}
-					{#if formIsValid}
-						<p class="text-success text-xs">Looks good!</p>
-					{/if}
-				</div>
+			<!-- form errors -->
+			<div class="my-2 text-center text-md">
+				{#if !titleIsValid}
+					<p class="text-error">Must have valid title</p>
+				{/if}
+				{#if !urlIsValid}
+					<p class="text-error">Must have a valid URL</p>
+				{/if}
+			</div>
 
+			<div class="flex gap-4">
 				<button
 					disabled={!formIsValid}
 					type="submit"
-					class="btn btn-success block">Add Link</button
+					class="btn btn-sm btn-success grow">Add Link</button
 				>
+			</div>
+		</form>
 
-				<button type="button" class="btn btn-xs my-4" on:click={cancelLink}
-					>Cancel</button
+		<h2 class="text-center text-lg mb-1 mt-3">
+			Modify Links order (drag-and-drop):
+		</h2>
+
+		<SortableList list={$userData?.links} on:sort={sortList} let:item let:index>
+			<div class="group relative">
+				<UserLink {...item} />
+				<button
+					on:click={() => deleteLink(item)}
+					class="btn btn-xs btn-error invisible group-hover:visible transition-all absolute -right-6 bottom-10"
+					>Delete</button
 				>
-			</form>
-		{:else}
-			<button
-				on:click={() => (showForm = true)}
-				class="btn btn-outline btn-info block mx-auto my-4"
-			>
-				Add a Link
-			</button>
-		{/if}
+			</div>
+		</SortableList>
 	{/if}
 </main>
