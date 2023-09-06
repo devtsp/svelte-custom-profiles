@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { adminAuth, adminDB } from '$lib/server/admin';
+import { adminDB } from '$lib/server/admin';
 import { error, redirect, type Actions, fail } from '@sveltejs/kit';
 
 export const load = (async ({ locals, params }) => {
@@ -42,5 +42,7 @@ export const actions = {
 		await userRef.update({
 			bio,
 		});
+
+		throw redirect(301, `/${username}/edit`);
 	},
 } satisfies Actions;

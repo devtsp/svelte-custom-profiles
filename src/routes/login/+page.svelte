@@ -32,12 +32,12 @@
 			{$user.displayName}
 		</span>
 	</h2>
-	<p class="text-center text-success mt-3">You are logged in</p>
+	<p class="text-center text-accent mt-3">You are logged in</p>
 	<button class="btn btn-sm btn-outline btn-error mt-5" on:click={signOutSSR}
 		>Sign out</button
 	>
 {:else}
-	<button class="btn btn-sm btn-outline btn-info" on:click={signInWithGoogle}
+	<button class="btn btn-sm btn-accent btn-outline" on:click={signInWithGoogle}
 		>Sign in with Google</button
 	>
 {/if}

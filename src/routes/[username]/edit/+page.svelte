@@ -64,12 +64,11 @@
 
 <main class="max-w-xl mx-auto my-2">
 	{#if $userData?.username == $page.params.username}
-		<h1 class="text-xl font-bold my-2 text-center">Edit your Profile</h1>
-
 		<a
-			class="link link-hover text-secondary block text-lg text-center"
+			class="link link-hover text-accent block text-2xl text-center my-4"
 			href={`${PUBLIC_PAGE}/${$userData.username}/bio`}
-			>Edit Bio 🖊
+		>
+			Edit Bio 🖊
 		</a>
 
 		<h2 class="text-center text-lg mb-1 mt-3">Add a new link:</h2>
@@ -118,13 +117,11 @@
 				{/if}
 			</div>
 
-			<div class="flex gap-4">
-				<button
-					disabled={!formIsValid}
-					type="submit"
-					class="btn btn-sm btn-success grow">Add Link</button
-				>
-			</div>
+			<button
+				disabled={!formIsValid}
+				type="submit"
+				class="btn btn-sm btn-success grow rounded w-full">Add Link</button
+			>
 		</form>
 
 		<h2 class="text-center text-lg mb-1 mt-3">

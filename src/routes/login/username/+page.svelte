@@ -63,8 +63,7 @@
 	{#if $userData?.username}
 		<p class="text-xl">
 			Your username is <br />
-			<span class="text-4xl font-bold text-blue-500">@{$userData.username}</span
-			>
+			<span class="text-4xl font-bold text-accent">@{$userData.username}</span>
 		</p>
 		<p class="my-4">(Username cannot be changed)</p>
 		<a href="/login/photo" class="link-accent underline">Upload Profile Image</a

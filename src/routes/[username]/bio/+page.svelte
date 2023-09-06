@@ -16,11 +16,12 @@
 			</label>
 			<textarea
 				name="bio"
-				class="textarea textarea-bordered textarea-accent rounded"
+				class="textarea textarea-bordered textarea-neutral rounded"
 				value={data.bio}
 			/>
 		</div>
-		<button class="btn btn-sm btn-primary mt-3 mx-auto block">Update Bio</button
+		<button class="btn btn-sm btn-accent btn-outline mt-3 mx-auto block"
+			>Update Bio</button
 		>
 	</form>
 </main>
