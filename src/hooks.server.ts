@@ -8,6 +8,7 @@ export const handle = (async ({ event, resolve }) => {
 		event.locals.userId = decodedClaims.uid;
 	} catch (e) {
 		event.locals.userId = null;
+		return resolve(event);
 	}
 	// continue to server endpoint
 	return resolve(event);
