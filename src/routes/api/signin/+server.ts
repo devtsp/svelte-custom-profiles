@@ -3,7 +3,7 @@ import { adminAuth } from '$lib/server/admin';
 import { error, json } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
-	const idToken = await request.json();
+	const { idToken } = await request.json();
 	const expiresIn = 1000 * 60 * 60 * 24 * 5; // 5 days
 	const decodedIdToken = await adminAuth.verifyIdToken(idToken);
 
